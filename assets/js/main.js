@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initSliders() {
   // Slider photos
   const photoSlides = document.querySelectorAll(".photo-slides img");
   let currentPhotoIndex = 0;
@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  setInterval(moveSlide, 7000);
-});
+  setInterval(moveSlide, 5000);
+}
  document.addEventListener("DOMContentLoaded", () => {
   initSliders();
 
