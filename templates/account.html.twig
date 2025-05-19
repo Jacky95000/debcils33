@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center;">Bienvenue sur votre espace</h1>
+    
+    <div class="button-group">
+        <a href="{{ path('app_login') }}">
+            <button class="custom-button">Se connecter</button>
+        </a>
+      
+    </div>
+{% endblock %}

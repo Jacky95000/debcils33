@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}DébOcils33{% endblock %}</title>
+       <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+
+    <header style="display: flex; justify-content: flex-end; padding: 20px;">
+    {% if app.user %}
+        <div class="user-menu">
+            <span>Bienvenue {{ app.user.firstname }}</span>
+            <a href="{{ path('app_logout') }}">
+                <button class="custom-button">Déconnexion</button>
+            </a>
+        </div>
+    {% else %}
+        <a href="{{ path('app_account') }}">
+            <button class="custom-button">Mon compte</button>
+        </a>
+    {% endif %}
+</header>
+
+    <body>
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+        {% block body %}{% endblock %}
+        <script src="{{ asset('js/main.js') }}"></script>
+    </body>
+</html>

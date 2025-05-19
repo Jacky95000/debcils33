@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - DébOcils33{% endblock %}
+
+{% block body %}
+<header id="tête">
+    <div class="lien">
+        <ul>    
+            <li><a href="#quiJe">Qui je suis ?</a></li>
+            <li><a href="#photo">Photo Avis clients</a></li>
+            <li><a href="#prestations">Prestations</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <a href="{{ is_granted('IS_AUTHENTICATED_FULLY') ? path('app_rendezvous') : path('app_register') }}">
+    <button class="custom-button">Prendre rendez-vous</button></a>
+        </ul>
+    </div>
+    <img id="logo" src="{{ asset('img/logocildeb.jpg') }}" alt="logo DebOcils33">
+    <div>
+        <h2><a href="#rendezVs">Prendre rendez-vous</a></h2>
+    </div>
+</header>
+
+<main>
+    <!-- Qui je suis ? -->
+    <article id="quiJe">
+        <h2 class="title">Qui je suis ?</h2>
+        <div class="presentation">
+            <p id="presenta">Je me nomme Déborah, mais pour toi tu peux m'appeler DebOcils. Et ouais, je me fais des extensions de cil depuis maintenant plus de 10 ans, et je me suis dis: "Mais Déb puisque tu adores te faire belle te sentir FEMME, pourquoi tu ne ferai pas la même chose pour d'autres femmes ?" Et c'est ainsi que je me suis formé et que j'en ai fait mon métier, mon but est de te sublimer par ton regard. Alors qu'est-ce que tu attends ? Prends rendez-vous, en plus c'est moi qui vient à toi, alors dépêche toi.</p>
+        </div>
+    </article>
+
+    <!-- Photo -->
+    <section id="photo">
+        <h2 class="title">Photo</h2>
+        <div class="slides photo-slides">
+            <img src="{{ asset('img/cils1.jpg') }}" alt="">
+            <img src="{{ asset('img/cils2.jpg') }}" alt="">
+            <img src="{{ asset('img/cils3.jpg') }}" alt="">
+            <img src="{{ asset('img/cils4.jpg') }}" alt="">
+        </div>
+    </section>
+
+    <!-- Avis clients -->
+    <section>
+        <h2>Avis clients</h2>
+            <div class="avis-slider-container">
+            <div class="avis-slider-track slides avis-slides">
+                 <img src="{{ asset('img/avis1.png') }}" alt="Avis 1">
+                 <img src="{{ asset('img/avis2.jpg') }}" alt="Avis 2">
+                 <img src="{{ asset('img/avis3.jpg') }}" alt="Avis 3">
+                 <img src="{{ asset('img/avis4.png') }}" alt="Avis 4">
+        </div>
+        </div>
+    </section>
+
+    <!-- Prestations -->
+    <section id="prestations">
+        <h2 class="title">Prestations</h2>
+        <h3 id="offre">Offre de Bienvenue</h3>
+        <div class="cilsImg">
+            <p id="prestation">
+                Réhaussement Cil 50€<br><br>
+                Réhaussement + Teinture + soin nutrition 55€<br><br>
+                Pose extension Cil à Cil 60€<br><br>
+                Remplissage de deux semaines 35€<br><br>
+                Remplissage de trois semaines 40€<br><br>
+                Dépose 10€
+            </p>
+            <p id="prestation">
+                Offre de Bienvenue <br><br>
+                Bonus: <br><br>
+                Offre gratuitement ta prochaine prestation si tu m'envoies 3 modèles
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<!-- Contact -->
+<footer>
+    <div class="topBot"></div>
+    <section id="contact">
+        <h2 class="title">Contact</h2>
+        <nav>
+            <ul id="socia">
+                <li><img src="{{ asset('img/telephone.png') }}" alt="">0000000000</li>
+                <li><a href="https://www.instagram.com/debocils33/#"><img src="{{ asset('img/instagram.png') }}" alt=""></a>DebOcils33</li>
+                <li><img src="{{ asset('img/lieu.png') }}" alt="">A DOMICILE</li>
+            </ul>
+        </nav>
+        <a href="#tête" class="arrow-up">↑</a>
+        <div class="topBot"></div>
+    </section>
+</footer>
+{% endblock %}
