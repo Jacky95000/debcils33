@@ -28,6 +28,11 @@ class RendezVous
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $prestation = null;
+
+    #[ORM\Column(type: 'integer')]
+    private int $duree;
     public function getId(): ?int
     {
         return $this->id;
@@ -80,4 +85,25 @@ class RendezVous
 {
     $this->createdAt = new \DateTime();
 }
+public function getPrestation(): ?string
+{
+    return $this->prestation;
+}
+
+public function setPrestation(string $prestation): static
+{
+    $this->prestation = $prestation;
+
+    return $this;
+}
+public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): self
+    {
+        $this->duree = $duree;
+        return $this;
+    }
 }

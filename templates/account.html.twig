@@ -4,11 +4,11 @@
 
 {% block body %}
     <h1 style="text-align: center;">Bienvenue sur votre espace</h1>
-    
-    <div class="button-group">
+        <a href="{{ path('app_home') }}" class="back-home" style="font-size: xx-large;">Retour à l'accueil</a>
+
+    <div style="display: flex; justify-content: center;">
         <a href="{{ path('app_login') }}">
             <button class="custom-button">Se connecter</button>
         </a>
-      
     </div>
 {% endblock %}

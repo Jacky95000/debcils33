@@ -16,6 +16,34 @@ class RendezVousRepository extends ServiceEntityRepository
         parent::__construct($registry, RendezVous::class);
     }
 
+   public function isCreneauLibre(\DateTime $date, \DateTime $heure, int $duree): bool
+{
+    $start = (clone $date)->setTime((int)$heure->format('H'), (int)$heure->format('i'));
+    $end = (clone $start)->modify("+$duree minutes");
+
+    $qb = $this->createQueryBuilder('r');
+
+    $qb->where('r.date = :date')
+       ->andWhere(
+           $qb->expr()->orX(
+               $qb->expr()->between('r.heure', ':start', ':end'),
+               $qb->expr()->andX(
+                   'r.heure <= :start',
+                   'DATE_ADD(r.heure, r.duree, \'minute\') > :start'
+               )
+           )
+       );
+
+    $qb->setParameter('date', $date); // <-- objet DateTime, pas string
+    $qb->setParameter('start', $start->format('H:i:s'));
+    $qb->setParameter('end', $end->format('H:i:s'));
+
+    $result = $qb->getQuery()->getResult();
+
+    return count($result) === 0;
+}
+
+
     //    /**
     //     * @return RendezVous[] Returns an array of RendezVous objects
     //     */
@@ -40,4 +68,4 @@ class RendezVousRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+} // <-- N’oublie pas cette accolade fermante !

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des rendez-vous{% endblock %}
+
+{% block body %}
+<h2>Liste des rendez-vous</h2>
+
+<table class="table-rdv">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rdv in rendezvous %}
+      <tr>
+        <td>{{ rdv.user.email }}</td>
+        <td>{{ rdv.date|date('d/m/Y') }}</td>
+        <td>{{ rdv.heure|date('H:i') }}</td>
+        <td>
+          <a href="{{ path('admin_rdv_delete', { id: rdv.id }) }}"
+             onclick="return confirm('Supprimer ce rendez-vous ? Cette action est irréversible.')">
+             🗑️ Supprimer
+          </a>
+        </td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="4">Aucun rendez-vous pour l’instant.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

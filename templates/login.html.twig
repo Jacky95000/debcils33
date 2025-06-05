@@ -1,21 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+
 
 {% block body %}
-<h1>Connexion</h1>
+        <a href="{{ path('app_home') }}" class="back-home" style="font-size: xx-large;">Retour à l'accueil</a>
+
+<a href= "{{ path('app_register') }}" style="font-size: xx-large; margin-left: 800px"> Pas encore inscrit ? Crée un compte</a>
+
+<h1 style="text-align:center; margin-bottom: 150px; margin-top: 50px; text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod; color: white">Connexion</h1>
 
 {% if error %}
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
+<div style="display: flex; justify-content: center;">
 <form method="post" action="{{ path('app_login') }}">
-    <label for="username">Email :</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="_password" required>
+    <label for="username"  style="text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod; color: white">Email :</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus style=" border: 5px solid goldenrod;">
+
+    <label for="password"  style="text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod; color: white">Mot de passe :</label>
+    <input type="password" id="password" name="_password" required style=" border: 5px solid goldenrod;">
 
     <button type="submit">Se connecter</button>
 </form>
+
 {% endblock %}

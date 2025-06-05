@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prendre un rendez-vous{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_home') }}" class="back-home" style="font-size: large;">← Retour à l'accueil</a>
+
+<section>
+  <h2>Prendre un rendez-vous</h2>
+
+  {{ form_start(form, {'attr': {'class': 'formulaire-rdv'}}) }}
+    {{ form_row(form.prestation) }}
+    {{ form_row(form.date, {'attr': {'class': 'datepicker'}}) }}
+
+    {{ form_row(form.heure, { attr: { id: 'rendez_vous_heure' } }) }}
+
+
+    <div id="horaire-container" class="horaire-grid">
+      {% for heure in ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'] %}
+        <button type="button" class="horaire-btn" data-heure="{{ heure }}">{{ heure|date("H\\h") }}</button>
+      {% endfor %}
+    </div>
+
+    <button type="submit">Valider</button>
+  {{ form_end(form) }}
+
+  {% if isAdmin %}
+    <div class="admin-tools">
+      <a href="{{ path('admin_rdv') }}" class="btn-admin">Voir les rendez-vous</a>
+    </div>
+  {% endif %}
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const dateInput = document.querySelector('.datepicker');
+  const hiddenInput = document.getElementById('rendez_vous_heure');
+  const buttons = document.querySelectorAll('.horaire-btn');
+  const response = await fetch('{{ path("api_rdv_disponibilites") }}');
+  const data = await response.json();
+
+  const rdvs = new Map();
+  const datesPleines = {};
+
+  data.forEach(rdv => {
+    if (!datesPleines[rdv.date]) datesPleines[rdv.date] = [];
+    datesPleines[rdv.date].push(rdv.heure);
+
+    if (!rdvs.has(rdv.date)) rdvs.set(rdv.date, new Set());
+    let time = new Date(`1970-01-01T${rdv.heure}:00`);
+    const slots = parseInt(rdv.duree) / 30;
+
+    for (let i = 0; i < slots; i++) {
+      rdvs.get(rdv.date).add(time.toTimeString().slice(0, 5));
+      time.setMinutes(time.getMinutes() + 30);
+    }
+  });
+
+  flatpickr(dateInput, {
+    dateFormat: 'Y-m-d',
+    minDate: "today",
+    disable: Object.entries(datesPleines).filter(([_, h]) => h.length >= 16).map(([d]) => d)
+  });
+
+  function updateButtons() {
+    const selectedDate = dateInput.value;
+    const blocked = rdvs.get(selectedDate) || new Set();
+
+    buttons.forEach(btn => {
+      const heure = btn.dataset.heure;
+      const isTaken = blocked.has(heure);
+      btn.classList.toggle('disabled', isTaken);
+      btn.disabled = isTaken;
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      buttons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      hiddenInput.value = btn.dataset.heure;
+    });
+  });
+
+  dateInput.addEventListener('change', updateButtons);
+  if (dateInput.value) updateButtons();
+});
+</script>
+{% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Inscription</h1>
-    {{ form_start(form) }}
+        <a href="{{ path('app_home') }}" class="back-home" style="font-size: xx-large;">Retour à l'accueil</a>
+
+    <h1 style="text-align:center; margin-bottom: 20px; margin-top: 50px; text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod; color: white">Inscription</h1>
+    {{ form_start(form, {'attr': {'class': 'formulaire-rdv'}}) }}
         {{ form_widget(form) }}
-        <button type="submit">S'inscrire</button>
+        <button type="submit" style=" margin-top: 25px;">S'inscrire</button>
     {{ form_end(form) }}
-    
 {% endblock %}

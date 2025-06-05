@@ -15,14 +15,4 @@ use Symfony\Component\Routing\Attribute\Route;
             'controller_name' => 'HomeController',
         ]);
     }
-
-    #[Route('/rendez-vous', name: 'app_rendez_vous')]
-    public function prendreRendezVous(): Response {
-
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_register');
-        }
-        return $this->render('rendezvous.html.twig');
-    }
-    
 }
