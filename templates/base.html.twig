@@ -6,6 +6,9 @@
 
         <title>{% block title %}DébOcils33{% endblock %}</title>
        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+       <!-- FullCalendar -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 
@@ -42,15 +45,8 @@
         <script src="{{ asset('js/main.js') }}"></script>
             <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
- <script>
-        flatpickr('.datepicker', {
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            disable: [
-                "2025-06-10", "2025-06-15" // 🛑 Dates désactivées ici
-            ]
-        });
-    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
 
     </body>
 </html>

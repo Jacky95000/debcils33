@@ -3,17 +3,16 @@
 namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class HeureToDateTimeTransformer implements DataTransformerInterface
 {
-    public function transform(mixed $value): mixed
+    public function transform($value): ?string
     {
-        return $value instanceof \DateTimeInterface ? $value->format('H:i') : '';
+        return $value instanceof \DateTime ? $value->format('H:i') : null;
     }
 
-    public function reverseTransform(mixed $value): mixed
+    public function reverseTransform($value): ?\DateTime
     {
-        return $value ? \DateTime::createFromFormat('H:i', $value) : null;
+        return \DateTime::createFromFormat('H:i', $value) ?: null;
     }
 }

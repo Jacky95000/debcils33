@@ -15,11 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegisterController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function displayRegister(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response
+    public function displayRegister(Request $request, EntityManagerInterface $entityManager,  UserPasswordHasherInterface $passwordHasher ): Response
     {
         $user = new User();
 

@@ -21,10 +21,11 @@
         <td>{{ rdv.date|date('d/m/Y') }}</td>
         <td>{{ rdv.heure|date('H:i') }}</td>
         <td>
-          <a href="{{ path('admin_rdv_delete', { id: rdv.id }) }}"
-             onclick="return confirm('Supprimer ce rendez-vous ? Cette action est irréversible.')">
-             🗑️ Supprimer
-          </a>
+          <form method="post" action="{{ path('rendezvous_delete', { id: rdv.id }) }}" onsubmit="return confirm('Supprimer ce rendez-vous ?')" style="display:inline;">
+  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rdv.id) }}">
+  <button class="btn btn-danger">🗑️ Supprimer</button>
+</form>
+
         </td>
       </tr>
     {% else %}

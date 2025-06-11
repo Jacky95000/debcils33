@@ -54,22 +54,22 @@ class RendezVous
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
-    {
-        $this->date = $date;
-        return $this;
-    }
+    public function setDate(?\DateTimeInterface $date): self
+{
+    $this->date = $date;
+    return $this;
+}
 
     public function getHeure(): ?\DateTime
     {
         return $this->heure;
     }
 
-    public function setHeure(\DateTime $heure): static
-    {
-        $this->heure = $heure;
-        return $this;
-    }
+   public function setHeure(?\DateTimeInterface $heure): self
+{
+    $this->heure = $heure;
+    return $this;
+}
 
     public function getCreatedAt(): ?\DateTime
     {

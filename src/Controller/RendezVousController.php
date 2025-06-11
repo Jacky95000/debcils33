@@ -13,20 +13,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class RendezVousController extends AbstractController
+#[Route('/rendezvous')]
+class RendezVousController extends AbstractController  
 {
-    #[Route('/rendezvous', name: 'app_rendezvous')]
+    #[Route('/', name: 'rendezvous_index', methods: ['GET'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function prendreRendezVous(
-        Request $request,
-        EntityManagerInterface $em,
-        RendezVousRepository $rdvRepo
-    ): Response {
-        // Redirection si admin
+    public function index(RendezVousRepository $rdvRepo): Response  
+    {
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin_rdv');
+            return $this->redirectToRoute('rendezvous_admin_index');
         }
+        
+        return $this->redirectToRoute('rendezvous_new');
+    }
 
+    #[Route('/new', name: 'rendezvous_new', methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function create(Request $request, EntityManagerInterface $em, RendezVousRepository $rdvRepo): Response  
+    {
         $rdv = new RendezVous();
         $rdv->setUser($this->getUser());
 
@@ -34,11 +38,11 @@ class RendezVousController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           if (!$rdv->getHeure()) {
-    $this->addFlash('error', 'Veuillez sélectionner une heure.');
-    return $this->redirectToRoute('app_rendezvous');
-}
-
+            // Vérifiez que toutes les propriétés requises sont définies  
+            if (!$rdv->getHeure() || !$rdv->getDate() || !$rdv->getPrestation()) {
+                $this->addFlash('error', 'Veuillez remplir tous les champs obligatoires.');
+                return $this->redirectToRoute('rendezvous_new');
+            }
 
             if (!$rdvRepo->isCreneauLibre($rdv->getDate(), $rdv->getHeure(), $rdv->getDuree())) {
                 $this->addFlash('error', 'Ce créneau est déjà pris.');
@@ -47,7 +51,7 @@ class RendezVousController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', 'Rendez-vous pris avec succès !');
-                return $this->redirectToRoute('app_rendezvous');
+                return $this->redirectToRoute('rendezvous_new');
             }
         }
 
@@ -57,9 +61,46 @@ class RendezVousController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/rdv', name: 'admin_rdv')]
+
+    #[Route('/{id}/edit', name: 'rendezvous_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function listeAdmin(RendezVousRepository $rdvRepo): Response
+    public function edit(Request $request, RendezVous $rendezVous, EntityManagerInterface $em, RendezVousRepository $rdvRepo): Response
+    {
+        $form = $this->createForm(RendezVousType::class, $rendezVous);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$rdvRepo->isCreneauLibre($rendezVous->getDate(), $rendezVous->getHeure(), $rendezVous->getDuree())) {
+                $this->addFlash('error', 'Ce créneau est déjà pris.');
+            } else {
+                $em->flush();
+                $this->addFlash('success', 'Rendez-vous modifié avec succès.');
+                return $this->redirectToRoute('rendezvous_admin_index');
+            }
+        }
+
+        return $this->render('admin/rdv_edit.html.twig', [
+            'form' => $form->createView(),
+            'rendezVous' => $rendezVous,
+        ]);
+    }
+
+    #[Route('/{id}/delete', name: 'rendezvous_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(Request $request, RendezVous $rendezVous, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $rendezVous->getId(), $request->request->get('_token'))) {
+            $em->remove($rendezVous);
+            $em->flush();
+            $this->addFlash('success', 'Rendez-vous supprimé avec succès.');
+        }
+
+        return $this->redirectToRoute('rendezvous_admin_index');
+    }
+
+    #[Route('/admin', name: 'rendezvous_admin_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminIndex(RendezVousRepository $rdvRepo): Response
     {
         $rendezvous = $rdvRepo->findAll();
 
@@ -68,7 +109,7 @@ class RendezVousController extends AbstractController
         ]);
     }
 
-    #[Route('/api/rdv/disponibilites', name: 'api_rdv_disponibilites')]
+    #[Route('/rendezvous/rdv/disponibilites', name: 'rendezvous_api_disponibilites', methods: ['GET'])]
     public function getDisponibilites(RendezVousRepository $rdvRepo): JsonResponse
     {
         $rdvs = $rdvRepo->findAll();
@@ -83,16 +124,5 @@ class RendezVousController extends AbstractController
         }
 
         return $this->json($data);
-    }
-
-    #[Route('/admin/rdv/delete/{id}', name: 'admin_rdv_delete')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function delete(RendezVous $rendezVous, EntityManagerInterface $em): Response
-    {
-        $em->remove($rendezVous);
-        $em->flush();
-
-        $this->addFlash('success', 'Rendez-vous supprimé avec succès.');
-        return $this->redirectToRoute('admin_rdv');
     }
 }

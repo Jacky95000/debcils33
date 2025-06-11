@@ -1,170 +1,170 @@
+/* === Variables Globales === */
+:root {
+  --gold: goldenrod;
+  --accent: salmon;
+  --highlight: rgb(252, 97, 8);
+  --bg-primary: rgb(255, 136, 136);
+  --text-white: white;
+  --font-main: "Aladin";
+}
+
+/* === Reset & Base === */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: rgb(255, 136, 136);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  font-family: var(--font-main);
 }
 
 html {
-    scroll-behavior: smooth;
-}
-
-header {
-    text-align: center;
-    flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: white;
-    font-size: xx-large;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--text-white);
+  font-size: xx-large;
 }
 
 li {
-    text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod;
+  text-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold), 0 0 20px var(--gold);
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    font-family: "Aladin";
-    font-style: oblique;
-    font-weight: bold;
-    -webkit-text-stroke: 1px white;
-    text-shadow: 3px 3px 5px rgb(252, 97, 8);
+  text-decoration: none;
+  color: inherit;
+  font-style: oblique;
+  font-weight: bold;
+  -webkit-text-stroke: 1px var(--text-white);
+  text-shadow: 3px 3px 5px var(--highlight);
 }
 
 a:hover {
-    color: #f1b605;
-    text-shadow: 0 0 10px white, 0 0 20px white;
+  color: #f1b605;
+  text-shadow: 0 0 10px var(--text-white), 0 0 20px var(--text-white);
 }
 
-#logo {
-    width: 40%;
-    height: auto;
+header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
-    color: white;
-    text-shadow: 0 0 5px goldenrod, 0 0 10px goldenrod, 0 0 15px goldenrod, 0 0 20px goldenrod;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: flex;
-    font-family: "Aladin";
-    justify-content: center;
-    font-size: 60px;
-}
-
-article {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.presentation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 100px;
-    font-family: "Aladin";
-}
-
-#presenta {
-    background-image: url(../img/présentationdeb.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  color: var(--text-white);
+  text-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold), 0 0 20px var(--gold);
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
 }
 
 img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    margin-top: 70px;
-    width: 100%;
+  display: block;
+  margin: 70px auto 20px;
+  width: 100%;
 }
 
-#offre {
-    margin-top: 70px;
-    text-align: center;
-    font-family: "Aladin";
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-    -webkit-text-stroke: 1px white;
-    text-shadow: 3px 3px 5px rgb(252, 97, 8);
+#logo {
+  width: 40%;
+  height: auto;
 }
 
-.cilsImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 250px;
-    margin: 20px auto;
-    margin-top: 120px;
-    width: 80%;
+article,
+.presentation,
+.cilsImg,
+#formul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.presentation {
+  gap: 100px;
+}
+
+#presenta,
+#prestation {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#presenta {
+  background-image: url(../img/présentationdeb.jpg);
 }
 
 #prestation {
-    background-image: url(../img/fondcil2.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    font-family: "Aladin";
+  background-image: url(../img/fondcil2.jpg);
 }
 
 p {
-    width: 40%; 
-    height: 500px; 
-    padding: 20px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: white; 
-    font-size: 25px;
-    text-align: center; 
-    border-radius: 40%;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 40%;
+  height: 500px;
+  padding: 20px;
+  color: var(--text-white);
+  font-size: 25px;
+  text-align: center;
+  border-radius: 40%;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes sparkleFade {
-    0% {
-      opacity: 0;
-      filter: brightness(2) drop-shadow(0 0 10px white);
-    }
-    50% {
-      opacity: 1;
-      filter: brightness(1.3) drop-shadow(0 0 15px rgb(255, 255, 255));
-    }
-    100% {
-      opacity: 1;
-      filter: brightness(1);
-    }
+#offre {
+  margin-top: 70px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  -webkit-text-stroke: 1px var(--text-white);
+  text-shadow: 3px 3px 5px var(--highlight);
 }
 
 .photo-slides img {
-    display: none;
-    width: 550px;
-    height: 600px;
-    object-fit: cover;
-    border-radius: 200px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    transition: opacity 0.8s ease-in-out;
+  display: none;
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
 }
 
 .photo-slides img.active {
-    display: block;
-    animation: sparkleFade 1.5s ease forwards;
+  display: block;
+  animation: sparkleFade 1.5s ease forwards;
+}
+
+@keyframes sparkleFade {
+  0% {
+    opacity: 0;
+    filter: brightness(2) drop-shadow(0 0 10px white);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.3) drop-shadow(0 0 15px white);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
 }
 
 .avis-slider-container {
   overflow: hidden;
-  width: auto; /* adapte à la largeur souhaitée */
+  width: auto;
   margin: auto;
 }
 
@@ -174,150 +174,118 @@ p {
 }
 
 .avis-slider-track img {
-  width: 550px;
+  width: 100%;
+  max-width: 550px;
   flex-shrink: 0;
   border-radius: 20px;
   margin-right: 10px;
 }
 
-#rendezVs {
-    display: flex;
-    justify-content: center;
-}
-
-#rdz {
-    font-family: "Aladin";
-    font-size: x-large;
-    color: white;
-    border: 5px solid goldenrod;
-    border-radius: 100px;
-    width: 300px;
-    height: 50px;
-    background-color: salmon;
-    display: flex;
-    margin-left: 150px;
-}
-
+/* === Formulaire === */
 #calendar label,
-#calendar input {
-    font-family: "Aladin";
-    font-size: x-large;
-    text-align: center;
-    background-color: salmon;
-    border-radius: 100px;
-    border: 5px solid goldenrod;
-    color: white;
+#calendar input,
+#formul input,
+button {
+  font-size: x-large;
+  text-align: center;
+  background-color: var(--accent);
+  border-radius: 100px;
+  border: 5px solid var(--gold);
+  color: var(--text-white);
+  font-family: var(--font-main);
 }
 
 #calendar label {
-    display: flex;
-    width: 9%;
-    margin-left: 80px;
-    margin-bottom: -30px;
+  width: 9%;
+  margin: 0 0 -30px 80px;
 }
 
 #calendar input {
-    display: flex;
-    width: 12%;
-    margin-left: 150px;
-    margin-top: 50px;
+  width: 12%;
+  margin: 50px 0 0 150px;
 }
 
-#formul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+#rendezVs {
+  display: flex;
+  justify-content: center;
 }
 
-#formul input {
-    border-radius: 100px;
-    border: 5px solid goldenrod;
-    width: 200px;
-    height: 50px;
-    background-color: salmon;
-    color: white;
-    font-family: "Aladin";
-    font-size: x-large;
-    text-align: center;
+#rdz {
+  width: 300px;
+  height: 50px;
+  margin-left: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input::placeholder {
-    font-family: "Aladin";
-    font-size: x-large;
-    color: white;
-    text-align: center;
+  font-size: x-large;
+  color: var(--text-white);
 }
 
 button {
-    font-family: "Aladin";
-    font-size: x-large;
-    color: white;
-    border: 5px solid goldenrod;
-    border-radius: 100px;
-    width: 300px;
-    height: 50px;
-    background-color: salmon;
-    cursor: pointer;
+  width: 300px;
+  height: 50px;
+  cursor: pointer;
 }
 
 button:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 150px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 150px;
 }
 
-/* Footer */
+/* === Footer === */
 .topBot {
-    background-color: gold;
-    width: 100%;
-    height: 40px;
-    margin-top: 50px;
+  background-color: var(--gold);
+  width: 100%;
+  height: 40px;
+  margin-top: 50px;
 }
 
 #socia {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    font-size: medium;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  font-size: medium;
 }
 
 #socia img {
-    display: flex;
-    width: 50px;
-    height: auto;
+  width: 50px;
+  height: auto;
 }
 
 .arrow-up {
-    display: flex;
-    justify-content: center;
-    font-size: 3rem;
-    text-decoration: none;
-    color: goldenrod;
-    animation: bounce 2s infinite;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: transform 0.2s;
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--gold);
+  animation: bounce 2s infinite;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .arrow-up:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(10px);
-    }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
 }
-/* Pages rendez-vous */
+
+/* === Pages rendez-vous === */
 .formulaire-rdv {
   max-width: 500px;
   margin: 0 auto;
@@ -338,54 +306,56 @@ button:active {
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
-  border: 3px solid  #f8b702;
+  border: 3px solid #f8b702;
   border-radius: 5px;
 }
 
 .formulaire-rdv button {
   padding: 10px 15px;
-  background-color: salmon;
-  border: 2px goldenrod;
-  color: #fff;
+  background-color: var(--accent);
   border: none;
+  color: var(--text-white);
   border-radius: 25px;
   cursor: pointer;
 }
+
 .heure-grid div {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
 }
+
 .heure-grid input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 .heure-grid label {
-    background-color: #f5f5f5;
-    padding: 10px;
-    text-align: center;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: 1px solid #ccc;
 }
 
 .heure-grid input[type="radio"]:checked + label {
-    background-color: goldenrod;
-    color: white;
-    border-color: gold;
+  background-color: var(--gold);
+  color: var(--text-white);
+  border-color: var(--gold);
 }
+
 .horaire-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   gap: 10px;
   margin: 20px 0;
 }
 
 .horaire-btn {
   padding: 10px 20px;
-  border: 2px solid goldenrod;
+  border: 2px solid var(--gold);
   background: white;
   color: black;
   border-radius: 10px;
@@ -394,15 +364,11 @@ button:active {
   transition: all 0.2s ease-in-out;
 }
 
-.horaire-btn:hover {
-  background: goldenrod;
-  color: white;
-}
-
+.horaire-btn:hover,
 .horaire-btn.selected {
-  background-color: goldenrod;
-  color: white;
-  border-color: goldenrod;
+  background: var(--gold);
+  color: var(--text-white);
+  border-color: var(--gold);
 }
 
 .horaire-btn.disabled {
@@ -411,3 +377,113 @@ button:active {
   color: #666;
   cursor: not-allowed;
 }
+/* ========== Responsive Design ========== */
+
+/* Tablettes (1024px et moins) */
+@media (max-width: 1024px) {
+  .presentation,
+  .cilsImg {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  p {
+    width: 80%;
+    height: auto;
+    font-size: 20px;
+  }
+
+  #offre {
+    font-size: 30px;
+  }
+
+  #formul input,
+  #calendar input {
+    width: 70%;
+  }
+
+  .photo-slides img {
+    width: 90%;
+    height: auto;
+  }
+}
+
+/* Mobiles (768px et moins) */
+@media (max-width: 768px) {
+  ul {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h2 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .presentation {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  #rdz,
+  button {
+    width: 80%;
+    font-size: large;
+  }
+
+  #calendar label,
+  #calendar input {
+    width: 80%;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .horaire-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .formulaire-rdv {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .button-container {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .arrow-up {
+    font-size: 2.5rem;
+  }
+}
+
+/* Petits smartphones (480px et moins) */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 30px;
+  }
+
+  a {
+    font-size: large;
+  }
+
+  p {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .horaire-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  #logo {
+    width: 70%;
+  }
+}
+
